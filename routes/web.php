@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 // 追加
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\ScrapeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // 追加
-    Route::get('tweets/create', [TweetController::class, 'scrape'])->name('tweets.scrape');
+    Route::post('scrapes', [ScrapeController::class, 'scrape'])->name('scrapes.scrape');
+    Route::resource('scrapes', ScrapeController::class);
     Route::resource('tweets', TweetController::class);
 });
 

@@ -15,12 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <!-- 2項目追加 -->
+                    <!-- 3項目追加 -->
                     <x-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
                         {{ __('Tweet一覧') }}
                     </x-nav-link>
                     <x-nav-link :href="route('tweets.create')" :active="request()->routeIs('tweets.create')">
                         {{ __('Tweet作成') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('scrapes.index')" :active="request()->routeIs('scrapes.index')">
+                        {{ __('Scrape') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -77,12 +80,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <!-- 2項目追加 -->
+            <!-- 3項目追加 -->
             <x-responsive-nav-link :href="route('tweets.index')" :active="request()->routeIs('tweets.index')">
                 {{ __('Tweet一覧') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('tweets.create')" :active="request()->routeIs('tweets.create')">
                 {{ __('Tweet作成') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('scrapes.index')" :active="request()->routeIs('scrapes.index')">
+                {{ __('Scrape') }}
             </x-responsive-nav-link>
         </div>
 
