@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tweet;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 class TweetController extends Controller
 {
@@ -78,5 +80,52 @@ class TweetController extends Controller
         // 追加
         $tweet->delete();
         return redirect()->route('tweets.index');
+    }
+
+    /**
+     * Scrape tweets from external source.
+     */
+    public function scrape(Request $request)
+    {
+        // スクレイピング対象のURL
+        $url = "https://www.jalan.net/yad397057/kuchikomi/";
+
+        // Guzzleクライアントのインスタンスを作成
+        $client = new Client();
+        $response = $client->get($url);
+        
+        // ステータスコードが200以外の場合は処理を中断
+        if ($response->getStatusCode() != 200) {
+            // エラー処理
+            abort(500, 'Failed to fetch data from the URL');
+        }
+        
+        // HTMLコンテンツを取得
+        $content = $response->getBody()->getContents();
+        
+        // Symfony DomCrawlerを使用してHTMLを解析
+        $crawler = new Crawler($content);
+        
+        // スクレイピングしたい要素を選択
+        $yadotext = $crawler->filter('h2')->text();
+
+        /*
+        $reviews = $crawler->filter('.c-kuchikomi__item')->each(function ($node) {
+            
+            // 各レビューの情報を抽出
+            $title = $node->filter('.c-kuchikomi__title')->text();
+            $content = $node->filter('.c-kuchikomi__text')->text();
+            
+            // レビューの情報を配列として返す
+            return [
+                'title' => $title,
+                'content' => $content,
+            ];
+        });
+        */
+        
+        // ビューにデータを渡す
+        // return view('tweets.create', ['reviews' => $reviews]);
+        return view('tweets.create', compact('yadotext'));
     }
 }

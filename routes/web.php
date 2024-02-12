@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // 追加
+    Route::get('tweets/create', [TweetController::class, 'scrape'])->name('tweets.scrape');
     Route::resource('tweets', TweetController::class);
 });
 
