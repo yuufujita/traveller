@@ -21,7 +21,10 @@
                     @else
                     <p>スクレイピング結果がありません。</p>
                     @endif
-                    <form method="POST" action="{{ route('scrapes.store') }}">
+                    <p>
+                        {{ isset($yadotext) ? $yadotext : ''}}
+                    </p>
+                    <form method="POST" action="{{ route('scrapes.scrape') }}">
                         <button type="submit" class="bg-fuchsia-500 hover:bg-fuchsia-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Scrape</button>
                     </form>
                 </div>

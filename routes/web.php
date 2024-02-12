@@ -30,8 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // 追加
+    Route::get('scrapes', [ScrapeController::class, 'index'])->name('scrapes.index');
     Route::post('scrapes', [ScrapeController::class, 'scrape'])->name('scrapes.scrape');
-    Route::resource('scrapes', ScrapeController::class);
     Route::resource('tweets', TweetController::class);
 });
 
